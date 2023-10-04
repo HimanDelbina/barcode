@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+	
+.grid-container {
+  display: grid;
+  gap: 50px 100px;
+}
+
+.item {
+height: auto;
+width: 350px;
+border-radius: 10px;
+margin: 10px;
+font-weight: bold;
+align-self: center;
+padding: 10px;
+align-items: center;
+justify-content: center;
+font-size: 15px;
+display: flex;
+flex-direction: column;
+}
+.item_img {
+align-self: center;
+align-items: center;
+justify-content: center;
+}
+.item_txt {
+align-self: center;
+align-items: center;
+justify-content: center;
+}
+
+.parent {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-template-rows: repeat(3, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+align-items: center;
+justify-content: center;
+}
+.page_body{
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+.page_body_top{
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: aqua; */
+}
+.page_body_down{
+  flex-grow: 1;
+  /* background-color: rgb(229, 255, 0); */
+}
+.Input {
+  position: relative;
+}
+
+.Input-text {
+  display: block;
+  margin: 0;
+  padding: var(--inputPaddingV) var(--inputPaddingH);
+  color: inherit;
+  width: 100%;
+  font-family: inherit;
+  font-size: var(--inputFontSize);
+  font-weight: inherit;
+  line-height: var(--inputLineHeight);
+  border: none;
+  border-radius: 0.4rem;
+  transition: box-shadow var(--transitionDuration);
+}
+.btn{
+  width: 100px;
+  border: none;
+  background-color: blue;
+  align-self: center;
+}
+</style>
+<div class="page_body">
+  <div class="page_body_top">
+    <form action="{% url 'booksTest' %}" method="GET">
+      <input type="text" name="q" placeholder="جستجو بارکد" class="Input-text">
+      <button type="submit" class="btn">جستجو</button>
+    </form>
+  </div>
+  <div class="page_body_down">
+    <div class="parent">
+      {% for book in book_list %}
+      <div class="item">
+        <img src="{{book.barcode.url}}" height="120" width="250"
+          class="item_img">
+        <p class="item_txt">{{book.title}}</p>
+        <!-- <p>{{book.isbn}}</p> -->
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
