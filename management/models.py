@@ -8,7 +8,6 @@ import os
 from django.utils.html import mark_safe
 
 
-
 class BarCodeModel(models.Model):
     title = models.CharField(max_length=200, help_text='نام کالا')
     isbn = models.CharField('ISBN', max_length=13, help_text='کالا کد')
@@ -30,8 +29,5 @@ class BarCodeModel(models.Model):
                        add_checksum=False)
         buffer = BytesIO()
         code.write(buffer)
-        self.barcode.save('isbn.png', File(buffer), save=False)
+        self.barcode.save(f'{self.title}.png', File(buffer), save=False)
         return super().save(*args, **kwargs)
-
-
-

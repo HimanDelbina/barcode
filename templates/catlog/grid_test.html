@@ -22,7 +22,14 @@ justify-content: center;
 font-size: 15px;
 display: flex;
 flex-direction: column;
+background-color: white;
+transition: 0.4s;
 }
+.item:hover{
+  background-color: rgba(0, 0, 255, 0.26);
+  cursor: pointer;
+}
+
 .item_img {
 align-self: center;
 align-items: center;
@@ -51,9 +58,9 @@ justify-content: center;
 .page_body_top{
   height: 7rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* background-color: aqua; */
 }
 .page_body_down{
   flex-grow: 1;
@@ -65,32 +72,53 @@ justify-content: center;
 
 .Input-text {
   display: block;
-  margin: 0;
-  padding: var(--inputPaddingV) var(--inputPaddingH);
-  color: inherit;
-  width: 100%;
-  font-family: inherit;
-  font-size: var(--inputFontSize);
-  font-weight: inherit;
-  line-height: var(--inputLineHeight);
-  border: none;
   border-radius: 0.4rem;
-  transition: box-shadow var(--transitionDuration);
+  height: 40px;
+  width: 400px;
+  align-self: center;
+  margin-bottom: 10px;
+  border-color: rgb(202, 202, 202);
+  border-style: groove;
 }
 .btn{
-  width: 100px;
+  width: 400px;
   border: none;
-  background-color: blue;
+  background-color: rgb(230, 230, 230);
   align-self: center;
+  font-weight: bold;
+}
+.form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.divider {
+  position: relative;
+  height: 0.5px;
+}
+
+.div-transparent:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  width: 90%;
+  height: 1px;
+  background-image: linear-gradient(to right, transparent, rgb(48, 49, 51), transparent);
 }
 </style>
 <div class="page_body">
   <div class="page_body_top">
-    <form action="{% url 'booksTest' %}" method="GET">
+    <form action="{% url 'booksTest' %}" method="GET" class="form">
       <input type="text" name="q" placeholder="جستجو بارکد" class="Input-text">
       <button type="submit" class="btn">جستجو</button>
     </form>
   </div>
+  <div class="divider div-transparent"></div>
   <div class="page_body_down">
     <div class="parent">
       {% for book in book_list %}
